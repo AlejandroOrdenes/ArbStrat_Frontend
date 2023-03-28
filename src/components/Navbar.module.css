@@ -1,0 +1,32 @@
+.Navbar {
+    background-color: rgb(48, 48, 48);
+    width: 5vw;
+    height: 80vh;
+    color: white;
+    margin-left: 2%;
+    margin-top: 3%;
+    border-radius: 8px;
+    text-align: center;
+
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    color: rgb(158, 158, 158);
+    font-size: 1.5vw;
+    padding-top: 40%;
+    transition: 0.5s;
+}
+
+li:hover {
+    color: greenyellow;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+
+
