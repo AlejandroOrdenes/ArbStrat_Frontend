@@ -1,0 +1,28 @@
+.Footer {
+    background-color: rgb(77, 77, 77);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 7%;
+    width: 88.3%;
+    margin-left: 2.3%;
+    padding: 0;
+  }
+  
+  .footerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+  }
+  
+
+  
+  .footerCopyright {
+    font-size: 0.8rem;
+    padding-top: 1%;
+  }

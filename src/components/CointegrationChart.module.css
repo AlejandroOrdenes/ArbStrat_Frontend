@@ -1,0 +1,7 @@
+.chartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ajusta el ancho del contenedor según sea necesario */
+    height: 100%; /* Establece el alto del contenedor */
+  }

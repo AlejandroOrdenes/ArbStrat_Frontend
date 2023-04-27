@@ -1,0 +1,11 @@
+.cards {
+    background-color:  rgb(48, 48, 48);
+    color: white;
+    padding: 10%;
+    border-radius: 8px;
+}
+
+.card {
+    border: none;
+    
+}
