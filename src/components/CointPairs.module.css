@@ -55,3 +55,15 @@ h4 {
     padding: 1%;
     color: rgb(158, 158, 158);
 }
+th {
+    font-weight: normal;
+}
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: #343a40; /* Asegúrate de que el color de fondo coincida con el de la tabla */
+  }
+
+  .table-dark tbody tr.rowSelected {
+    background-color: green !important;
+  }

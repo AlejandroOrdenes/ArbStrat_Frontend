@@ -1,0 +1,48 @@
+.tradeContainer {
+    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+}
+
+.coinsContainer{
+    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+}
+
+.placeTrade {
+    background-color: greenyellow;
+    border: none;
+    color: black;
+}
+
+/* Estilos del Modal */
+.modal-dialog {
+    background-color: #3a3a3a; /* Gris oscuro de fondo */
+  }
+  
+  .modal-header,
+  .modal-title,
+  .modal-body h4,
+  .modal-body h5,
+  .modal-body p,
+  .card-title,
+  .card-text {
+    color: #ffffff; /* Letras blancas */
+  }
+  
+  /* Estilos de los elementos dentro del Modal */
+  .modal-body input {
+    background-color: #575757; /* Color de fondo más claro para los inputs */
+    color: #ffffff; /* Letras blancas en los inputs */
+    border: none;
+  }
+  
+  .modal-body input::placeholder {
+    color: #ffffff; /* Color de las letras de los placeholders en los inputs */
+  }
+  
+  .modal-footer .btn {
+    background-color: #ffffff; /* Fondo blanco para el botón "Place Trades" */
+    color: #3a3a3a; /* Letras gris oscuro para el botón "Place Trades" */
+  }

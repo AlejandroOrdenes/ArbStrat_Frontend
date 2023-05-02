@@ -87,6 +87,7 @@ export const CointegrationChart = ({ market1, market2 }) => {
           const data2 = response2.data[0];
 
           setApiData([data1, data2]);
+          
         }
       } catch (error) {
         console.error("Error fetching data: ", error);

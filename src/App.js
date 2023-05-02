@@ -9,10 +9,10 @@ import { ZScoreChart } from "./components/ZScoreChart.js";
 import { SpreadChart } from "./components/SpreadChart.js";
 import { Footer } from "./components/Footer.js";
 
+
 function App() {
 
   const [selectedRow, setSelectedRow] = useState(null);
-
   const handleRowClick = (row) => {
     setSelectedRow(row);
   };
@@ -29,12 +29,13 @@ function App() {
              <CointegrationChart market1={selectedRow} market2={selectedRow}/>
             </div>}
             <div className="metricsChart">
-              <div className="zscore">
-                <ZScoreChart />
-              </div>
-              <div className="spread">
-                <SpreadChart />
-              </div>
+              
+            {selectedRow &&<div className="zscore">
+                <ZScoreChart rowData={selectedRow} />
+              </div>}
+              {selectedRow && <div className="spread">
+                <SpreadChart rowData={selectedRow} />
+              </div>}
             </div>
           </div>
           <Footer />

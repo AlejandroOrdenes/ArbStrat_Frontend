@@ -10,7 +10,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 
 
 ChartJS.register(
@@ -22,10 +21,33 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+export function SpreadChart({ rowData }) {
 
-export const options = {
+const options = {
   responsive: true,
   maintainAspectRatio: false,
+  scales: {
+    y: {
+      grid: {
+        drawBorder: false, // Oculta la línea de borde de la grilla
+        color: (context) => {
+          if (context.tick.value === 0) {
+            return 'rgba(255, 255, 255, 0.5)'; // Cambia el color de la línea del valor cero
+          } else {
+            return 'rgba(255, 255, 255, 0.1)'; // Cambia el color de las líneas de la grilla
+          }
+        },
+        lineWidth: (context) => {
+          if (context.tick.value === 0) {
+            return 1; // Cambia el ancho de la línea del valor cero
+          } else {
+            return 1; // Cambia el ancho de las líneas de la grilla
+          }
+        },
+        z: -1, // Coloca las líneas de la grilla detrás de las líneas de datos
+      },
+    },
+  },
   plugins: {
     legend: {
       position: 'top',
@@ -47,26 +69,24 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'January'];
+const datos = rowData.Spread.slice(-200);
 
-export const data = {
+const labels = Array.from({ length: datos.length }, (_, i) => i);
+
+const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 99999999 })),
+      label: `${rowData.Crypto1_ID} - ${rowData.Crypto2_ID}`,
+      data: datos,
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 99999999 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
+      borderWidth: 1, // Establecer el ancho de la línea
+      pointRadius: 0, // Ocultar los puntos
+    }
   ],
 };
 
-export function SpreadChart() {
+
   return <Line options={options} data={data} />;
 }
