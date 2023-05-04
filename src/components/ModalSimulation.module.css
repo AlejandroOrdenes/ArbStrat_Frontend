@@ -1,11 +1,11 @@
 .tradeContainer {
-    justify-content: space-around;
+    justify-content: space-evenly;
     display: flex;
     flex-direction: row;
 }
 
 .coinsContainer{
-    justify-content: space-around;
+    justify-content: space-evenly;
     display: flex;
     flex-direction: row;
 }
@@ -16,33 +16,52 @@
     color: black;
 }
 
-/* Estilos del Modal */
-.modal-dialog {
-    background-color: #3a3a3a; /* Gris oscuro de fondo */
-  }
-  
-  .modal-header,
-  .modal-title,
-  .modal-body h4,
-  .modal-body h5,
-  .modal-body p,
-  .card-title,
-  .card-text {
-    color: #ffffff; /* Letras blancas */
-  }
-  
-  /* Estilos de los elementos dentro del Modal */
-  .modal-body input {
-    background-color: #575757; /* Color de fondo más claro para los inputs */
-    color: #ffffff; /* Letras blancas en los inputs */
-    border: none;
-  }
-  
-  .modal-body input::placeholder {
-    color: #ffffff; /* Color de las letras de los placeholders en los inputs */
-  }
-  
-  .modal-footer .btn {
-    background-color: #ffffff; /* Fondo blanco para el botón "Place Trades" */
-    color: #3a3a3a; /* Letras gris oscuro para el botón "Place Trades" */
-  }
+.modalHead {
+  background-color: rgb(48, 48, 48);
+  color: greenyellow;
+}
+
+
+.modalBody {
+  background-color: rgb(48, 48, 48);
+  color: white;
+}
+
+.modalFooter {
+    background-color: rgb(48, 48, 48);}
+
+.directionContainer {
+  display: flex;
+  justify-content: center;
+  height: 6vh;
+  width: 100%;
+}
+
+
+.longButton,
+.shortButton {
+  border: none;
+  color: white;
+  width: 20%;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.longButton {
+  background-color: greenyellow;
+}
+
+.shortButton {
+  background: #ff2929;
+}
+
+.active {
+  opacity: 1 !important;
+}
+
+
+
+
+
+
+

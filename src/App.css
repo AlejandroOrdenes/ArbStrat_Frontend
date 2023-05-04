@@ -56,7 +56,3 @@
   padding: 2%;
   border-radius: 8px;
 }
-
-body.modal-open .Footer {
-  width: calc(100% - 2.3% * 2 - 22px); /* Ajustar el ancho del pie de página cuando el modal esté abierto */
-}

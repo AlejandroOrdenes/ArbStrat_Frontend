@@ -7,13 +7,11 @@
     border-top-right-radius: 8px;
     height: 7%;
     width: 88.3%;
-    margin-left: 2.3%;
+    margin-left: 9.3%;
     padding: 0;
   }
   
-  body.modal-open .Footer {
-    width: calc(100% - 2.3% * 2 - 22px); /* Ajustar el ancho del pie de página cuando el modal esté abierto */
-  }
+  
 
   .footerContainer {
     display: flex;
