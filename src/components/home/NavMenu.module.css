@@ -1,0 +1,65 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #1e1e1e;
+    color: #a5c5a5;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .logo {
+    max-height: 50px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  nav a {
+    color: white;
+    margin-right: 4%;
+    text-decoration: none;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    gap: 1rem;
+  }
+  
+  .crypto-image {
+    max-width: 100%;
+    max-height: 400px;
+  }
+  
+  .text-container {
+    text-align: center;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #2a4a75;
+    color: #a5c5a5;
+  }
+  
+  .bg-dark {
+    opacity: 0;
+  }
+
+  .menuContainer {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  

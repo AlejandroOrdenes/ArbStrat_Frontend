@@ -1,62 +1,116 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
-import Navbar from "./components/Navbar.js";
-import { CointPairs } from "./components/CointPairs.js";
-import { CointegrationChart } from "./components/CointegrationChart.js";
-import { MetricsCards } from "./components/MetricsCards.js";
+import Navbar from "./components/cointegration/Navbar.js";
+import { CointPairs } from "./components/cointegration/CointPairs.js";
+import { CointegrationChart } from "./components/cointegration/CointegrationChart.js";
+import { MetricsCards } from "./components/cointegration/MetricsCards.js";
 import "./App.css";
-import { ZScoreChart } from "./components/ZScoreChart.js";
-import { SpreadChart } from "./components/SpreadChart.js";
-import { Footer } from "./components/Footer.js";
-import { ListTrades } from "./components/ListTrades.js";
+import { ZScoreChart } from "./components/cointegration/ZScoreChart.js";
+import { SpreadChart } from "./components/cointegration/SpreadChart.js";
+import { Footer } from "./components/cointegration/Footer.js";
+import { ListTrades } from "./components/cointegration/ListTrades.js";
+import { Home } from "./components/home/Home.js";
+import { Login } from "./components/home/Login.js";
+import { Profile } from "./components/cointegration/Profile.js"
+import { useDispatch } from "react-redux";
+import { logout } from "../../front/src/store/actions.js";
+import { SignUp } from "./components/home/SignUp.js";
+import { useSelector } from "react-redux";
+import { About } from "./components/home/About.js";
 
 function App() {
   const [selectedRow, setSelectedRow] = useState(null);
+  const isAuthenticated = useSelector((state) => state.auth.token !== null);
+
   const handleRowClick = (row) => {
     setSelectedRow(row);
   };
 
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    // Llama a la acción de logout para actualizar el estado de Redux
+    dispatch(logout());
+
+    // Borra el token y otros datos del almacenamiento local
+    localStorage.removeItem("token");
+    localStorage.removeItem("expirationDate");
+    localStorage.removeItem("userId");
+    // ... (borrar otros datos necesarios)
+  };
+
   return (
     <Router>
-      <Navbar />
+      {/* {isAuthenticated && } */}
       <div className="App">
         <Routes>
-          <Route
-            path="/cointegration"
-            element={
-              <div className="dataContainer">
-                <CointPairs onRowClick={handleRowClick} />
-                <div className="chartPairs">
-                  {selectedRow && <MetricsCards rowData={selectedRow} />}
-                  {selectedRow && (
-                    <div className="cointegrated">
-                      <CointegrationChart
-                        market1={selectedRow}
-                        market2={selectedRow}
-                      />
-                    </div>
-                  )}
-                  <div className="metricsChart">
-                    {selectedRow && (
-                      <div className="zscore">
-                        <ZScoreChart rowData={selectedRow} />
-                      </div>
-                    )}
-                    {selectedRow && (
-                      <div className="spread">
-                        <SpreadChart rowData={selectedRow} />
-                      </div>
-                    )}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/about" element={<About />} />
+          {isAuthenticated &&
+            (
+              <Route
+                path="/trades"
+                element={
+                  <div>
+                    <Navbar onLogout={handleLogout} />
+                    <ListTrades />
+                    <Footer />
                   </div>
-                </div>
-                
-              </div>
-            }
-          />
-          <Route path="/trades" element={<ListTrades />} />
+                }
+              />
+            )}
+            {isAuthenticated &&
+            (
+              <Route
+                path="/profile"
+                element={
+                  <div>
+                    <Navbar onLogout={handleLogout} />
+                    <Profile/>
+                    <Footer />
+                  </div>
+                }
+              />
+            )}
+            {isAuthenticated && (
+              <Route
+                path="/cointegration"
+                element={
+                  <div className="dataContainer">
+                    <Navbar onLogout={handleLogout} />
+                    <CointPairs onRowClick={handleRowClick} />
+                    <div className="chartPairs">
+                      {selectedRow && <MetricsCards rowData={selectedRow} />}
+                      {selectedRow && (
+                        <div className="cointegrated">
+                          <CointegrationChart
+                            market1={selectedRow}
+                            market2={selectedRow}
+                          />
+                        </div>
+                      )}
+                      <div className="metricsChart">
+                        {selectedRow && (
+                          <div className="zscore">
+                            <ZScoreChart rowData={selectedRow} />
+                          </div>
+                        )}
+                        {selectedRow && (
+                          <div className="spread">
+                            <SpreadChart rowData={selectedRow} />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <Footer />
+                  </div>
+                }
+              />
+            )}
         </Routes>
       </div>
-      <Footer />
     </Router>
   );
 }

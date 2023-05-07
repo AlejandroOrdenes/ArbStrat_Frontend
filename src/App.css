@@ -1,8 +1,6 @@
 .App {
-  min-height: 200vh;
   text-align: center;
   display: flex;
-  margin-left: 7%;
   flex-direction: column;
   
 }
@@ -10,13 +8,13 @@
 .dataContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  
 }
 
 .chartPairs {
   display: table;
   height: 60vh;
-  margin-left: 2.5%;
+  margin-left: 9.3%;
   margin-right: 2.5%;
   margin-top: 3%;
   margin-bottom: 3%;
@@ -30,12 +28,14 @@
   padding: 2%;
   border-radius: 8px;
   width: 100%;
+  
 }
 
 .metricsChart {
   display: flex;
   width: 100%;
   height: 100%;
+  margin-bottom: 5%;
 }
 
 .zscore {

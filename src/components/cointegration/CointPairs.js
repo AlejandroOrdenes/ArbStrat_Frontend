@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "../components/CointPairs.module.css";
+import styles from "../cointegration/CointPairs.module.css";
 
 
 export const CointPairs = ({ onRowClick }) => {

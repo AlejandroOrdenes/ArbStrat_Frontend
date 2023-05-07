@@ -1,14 +1,14 @@
 import Table from "react-bootstrap/Table";
 import React from "react";
-import styles from '../components/ListTrades.module.css'
+import styles from '../cointegration/ListTrades.module.css'
 
 
-export const ListTrades = () => {
+export const Profile = () => {
     return (
         <div className={styles.pairsList}>
           <div className={styles.tableContainer}>
             <div className={styles.titleContainer}>
-              <h1 className={styles.title}>Pairs Trades</h1>
+              <h1 className={styles.title}>Profile</h1>
             </div>
     
             <div className={styles.table}>

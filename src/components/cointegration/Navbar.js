@@ -1,14 +1,25 @@
 import React, { useState } from "react";
-import styles from "../components/Navbar.module.css";
+import styles from "../cointegration/Navbar.module.css";
 import { NavLink } from "react-router-dom";
 import { BsGrid1X2Fill, BsPersonCircle, BsGraphUp, BsBoxArrowLeft } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({onLogin, onLogout}) => {
   const [activeIcon, setActiveIcon] = useState(""); // Estado para mantener el icono activo
+  const navigate = useNavigate();
+
   console.log(activeIcon)
   // Función para manejar el clic en el icono
   const handleIconClick = (iconName) => {
     setActiveIcon(iconName);
+  };
+
+  
+
+  const handleSubmit = () => {
+    // Aquí puedes agregar la lógica de autenticación
+    onLogin(false);
+    navigate("/cointegration");
   };
 
   return (
@@ -48,7 +59,7 @@ export const Navbar = () => {
           className={`${styles.icon}${activeIcon === "logout" ? ` ${styles.active}` : ""}`}
           onClick={() => handleIconClick("logout")}
         >
-          <NavLink to="/logout" activeClassName={styles.active}>
+          <NavLink to="/" onClick={onLogout} activeClassName={styles.active}>
             <span className={styles.iconContainer}>
               <BsBoxArrowLeft />
             </span>

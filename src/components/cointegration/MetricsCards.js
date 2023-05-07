@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import styles from "../components/MetricsCards.module.css"
-import { ModalSimulation } from "../components/ModalSimulation";
+import styles from "../cointegration/MetricsCards.module.css"
+import { ModalSimulation } from "../cointegration/ModalSimulation";
 
 export const MetricsCards = ({ rowData, prices }) => {
   const [showModal, setShowModal] = useState(false);

@@ -1,0 +1,53 @@
+.homeContainer {
+    background-image: url("../../assets/fondoLndscape.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+  }
+
+
+.strategy {
+    color: white;
+    font-weight: 900;
+    font-size: 5em;
+    font-family: revert;
+}
+
+.crypto {
+    font-weight: 100;
+    letter-spacing: 8px;
+    font-size: 3em;
+    font-weight: 300;
+    color: rgb(255, 255, 255);
+    font-family: unset;
+}
+
+.homeTitle {
+    text-align: initial;
+    margin-top: 10%;
+    margin-left: 5%;
+}
+  
+.buttonStart {
+    margin-top: 3%;
+    width: 10%;
+    height: 5vh;
+    border-width: 0.2px; /* Grosor del borde */
+    border-style: solid; /* Estilo del borde */
+    border-color: #ffffff67;
+    border-radius: 12px;
+    background-color: #00000029;
+    color: white;
+    letter-spacing: 2px;
+    transition: 1s;
+  }
+
+  .buttonStart:hover {
+    background-color: rgb(159, 201, 76);
+    border: none;
+    font-weight: 500;
+    transition: 0.5s;
+  }
+  

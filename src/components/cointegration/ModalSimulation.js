@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import styles from "../components/ModalSimulation.module.css";
+import styles from "../cointegration/ModalSimulation.module.css";
 import axios from "axios";
 
 
@@ -15,7 +15,7 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
   const [isLongActive, setLongActive] = useState(false);
   const [isShortActive, setShortActive] = useState(false);
   const [direction, setDirection] = useState("");
-  // const csrfToken = getCookie("csrftoken");
+  // const csrfToken = getCookie("csrftoken");p
 
   const getCsrfToken = async () => {
     try {

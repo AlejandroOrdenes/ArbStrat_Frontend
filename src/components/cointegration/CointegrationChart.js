@@ -1,7 +1,7 @@
 // LineChartComponent.js
 import React, { useEffect, useState } from "react";
 import { css } from "@emotion/react";
-import styles from "../components/CointegrationChart.module.css";
+import styles from "../cointegration/CointegrationChart.module.css";
 import { RingLoader } from "react-spinners";
 import {
   Chart as ChartJS,

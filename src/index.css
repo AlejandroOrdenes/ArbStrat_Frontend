@@ -6,6 +6,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(17, 17, 17);
+  background-image: url("../src/assets/fondoLndscape.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  background-attachment: fixed;
+  overflow-y: scroll; /* Añade desplazamiento vertical */
+  scrollbar-width: thin; /* Ajusta el grosor de la barra de desplazamiento (opcional) */
+  scrollbar-color: transparent transparent;
+  
 }
 
 code {
@@ -17,3 +28,4 @@ code {
   overflow-y: scroll !important;
   padding-right: 0px !important;
 }
+
