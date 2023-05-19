@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Modal, Button } from "react-bootstrap";
 import styles from "../cointegration/ModalSimulation.module.css";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { Toast } from "react-bootstrap";
 
 
 
@@ -15,19 +17,29 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
   const [isLongActive, setLongActive] = useState(false);
   const [isShortActive, setShortActive] = useState(false);
   const [direction, setDirection] = useState("");
-  // const csrfToken = getCookie("csrftoken");p
+  const token = useSelector(state => state.auth.token);
+  const [showToast, setShowToast] = useState(false);
+  const [toastHeader, setToastHeader] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastColor, setToastColor] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+  
 
-  const getCsrfToken = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/csrf/");
-      const csrfToken = response.data.csrfToken;
-      console.log(csrfToken);
-      return csrfToken;
-    } catch (error) {
-      console.error("Error fetching CSRF token:", error);
-      return "";
+  const hideToast = useCallback(() => {
+    setShowToast(false);
+  },);
+
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => {
+        hideToast();
+      }, 2000);
+
+      return () => {
+        clearTimeout(timer);
+      };
     }
-  };
+  }, [showToast, hideToast, useCallback]);
 
   const handleLongClick = () => {
     setLongActive(true);
@@ -41,20 +53,6 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
     setDirection('short')
   };
 
-  // function getCookie(name) {
-  //   let cookieValue = null;
-  //   if (document.cookie && document.cookie !== '') {
-  //     const cookies = document.cookie.split(';');
-  //     for (let i = 0; i < cookies.length; i++) {
-  //       const cookie = cookies[i].trim();
-  //       if (cookie.substring(0, name.length + 1) === (name + '=')) {
-  //         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-  //         break;
-  //       }
-  //     }
-  //   }
-  //   return cookieValue;
-  // }
 
   const calculateQuantity = (value, cryptoId) => {
     if (cryptoId === rowData.Crypto1_ID) {
@@ -98,20 +96,26 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
     setQuantity2(null);
     setLongActive(false)
     setShortActive(false)
+    setDirection("")
     closeModal();
   };
 
   const handlePlaceTradesClick = async () => {
-    const csrfToken = await getCsrfToken();
-    console.log("CSRF Token:", csrfToken);
-
+    console.log(rowData)
+    console.log(token)
+    console.log(rowData.Crypto1_ID)
+    console.log(rowData.Crypto2_ID)
+    console.log(rowData.id)
     try {
       const response = await axios.post(
         "http://localhost:8000/simulateTrades/",
         {
+          idPair: rowData.id,
           direction: direction,
-          price1: price1,
-          price2: price2,
+          coin1: rowData.Crypto1_ID,
+          coin2: rowData.Crypto2_ID,
+          price1: rowData.last_price_1,
+          price2: rowData.last_price_2,
           amount1: value1,
           amount2: value2,
           zscore: rowData.z_score[rowData.z_score.length - 1],
@@ -121,17 +125,23 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            "X-CSRFToken": csrfToken, // Include the CSRF token
+            "Authorization": `Bearer ${token}`,
             "X-Requested-With": "XMLHttpRequest",
           },
           withCredentials: true,
         }
       );
-      console.log("Enviado trades....");
-
-      // Handle the response from your Django backend
       console.log(response.data);
+      setShowToast(true)
+      setToastColor("yellowgreen")
+      setToastHeader("Trade OK")
+      setToastMessage("Placed Trade Correct!!")
+
     } catch (error) {
+      setShowToast(true)
+      setToastColor("#ff4a4a")
+      setToastHeader("Trade Fail!")
+      setToastMessage("Error to placed Trade!!")
       console.error("Error sending data to backend:", error);
     }
   };
@@ -144,6 +154,27 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
+      <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        style={{
+          position: "fixed",
+          top: "20%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1000,
+          opacity: 1, // Agregar esta línea para eliminar la opacidad
+          backgroundColor: toastColor,
+          color: "white",
+
+          // Cambiar el color de fondo del header
+        }}
+      >
+        <Toast.Header>
+          <strong className="mr-auto">{toastHeader}</strong>
+        </Toast.Header>
+        <Toast.Body>{toastMessage}</Toast.Body>
+      </Toast>
       <Modal.Header closeButton className={styles.modalHead}>
         <Modal.Title id="contained-modal-title-vcenter">
           Arbitrage Simulate
@@ -245,7 +276,7 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
         </div>
       </Modal.Body>
       <Modal.Footer className={styles.modalFooter}>
-        <Button onClick={handlePlaceTradesClick} className={styles.placeTrade}>
+        <Button onClick={handlePlaceTradesClick} className={styles.placeTrade} disabled={!price1 || !price2 || !direction}>
           Place Trades
         </Button>
       </Modal.Footer>

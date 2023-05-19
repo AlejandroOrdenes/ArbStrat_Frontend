@@ -14,7 +14,7 @@ export const MetricsCards = ({ rowData, prices }) => {
   const firstNonZeroValue = rowData.z_score.find((value) => value !== 0);
   return (
     <div class="row">
-      <div class="col mb-3 mb-sm-0">
+      {/* <div class="col mb-3 mb-sm-0">
         <div class="card" className={styles.card}>
           <div class="card-body" className={ styles.cards }>
             <h5 class="card-title">Z-Score</h5>
@@ -33,7 +33,7 @@ export const MetricsCards = ({ rowData, prices }) => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
       <div class="col">
         <div class="card" className={styles.card}>
           <div class="card-body" className={ styles.cards }>

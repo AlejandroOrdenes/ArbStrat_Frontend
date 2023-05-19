@@ -22,7 +22,8 @@ ChartJS.register(
   Legend
 );
 export function ZScoreChart({ rowData }) {
-
+  const mostRecentZScore = rowData.z_score[rowData.z_score.length - 1];
+  const zScoreText = `Z-Score ${mostRecentZScore.toFixed(4)}`;
 const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -60,7 +61,7 @@ const options = {
     },
     title: {
       display: true,
-      text: 'Z-Score',
+      text: zScoreText,
       color: 'white', // Cambia el color del texto del título
       font: {
         size: 24, // Cambia el tamaño del texto del título

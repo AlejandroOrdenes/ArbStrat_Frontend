@@ -15,7 +15,7 @@ body {
   background-attachment: fixed;
   overflow-y: scroll; /* Añade desplazamiento vertical */
   scrollbar-width: thin; /* Ajusta el grosor de la barra de desplazamiento (opcional) */
-  scrollbar-color: transparent transparent;
+  scrollbar-color: black;
   
 }
 

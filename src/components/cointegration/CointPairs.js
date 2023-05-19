@@ -80,21 +80,21 @@ export const CointPairs = ({ onRowClick }) => {
         className={styles.rowHover}
         onClick={() => onRowClick(row)}
       >
-        <th>{index + 1}</th>
-        <th>{formatDateTime(row.Date_detection)}</th>
+        {/* <th>{index + 1}</th>
+        <th>{formatDateTime(row.Date_detection)}</th> */}
         <td>{row.Crypto1_ID}</td>
         <td>{row.Crypto2_ID}</td>
-        <td>{row.Spread[row.Spread.length - 1]}</td>
+        {/* <td>{row.Spread[row.Spread.length - 1]}</td> */}
       </tr>
     ));
   };
 
   return (
-    <div className={styles.pairsList}>
+    // <div className={styles.pairsList}>
       <div className={styles.tableContainer}>
-        <div className={styles.titleContainer}>
+        {/* <div className={styles.titleContainer}>
           <h1 className={styles.title}>ArbStrat Crypto</h1>
-        </div>
+        </div> */}
 
         <div className={styles.table}>
           <h4>Cointegrated Pairs</h4>
@@ -102,11 +102,11 @@ export const CointPairs = ({ onRowClick }) => {
             <table class="table table-dark table-striped table-hover">
               <thead>
                 <tr>
-                  <th scope="col">N°</th>
-                  <th scope="col">Date</th>
+                  {/* <th scope="col">N°</th>
+                  <th scope="col">Date</th> */}
                   <th scope="col">Base Market</th>
                   <th scope="col">Quote Market</th>
-                  <th scope="col">Spread</th>
+                  {/* <th scope="col">Spread</th> */}
                 </tr>
               </thead>
               <tbody style={{ color: "white" }}>{renderTableRows()}</tbody>
@@ -114,6 +114,6 @@ export const CointPairs = ({ onRowClick }) => {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };

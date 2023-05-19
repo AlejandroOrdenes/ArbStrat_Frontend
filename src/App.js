@@ -11,7 +11,7 @@ import { Footer } from "./components/cointegration/Footer.js";
 import { ListTrades } from "./components/cointegration/ListTrades.js";
 import { Home } from "./components/home/Home.js";
 import { Login } from "./components/home/Login.js";
-import { Profile } from "./components/cointegration/Profile.js"
+import { Profile } from "./components/profile/Profile.js";
 import { useDispatch } from "react-redux";
 import { logout } from "../../front/src/store/actions.js";
 import { SignUp } from "./components/home/SignUp.js";
@@ -48,67 +48,72 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
-          {isAuthenticated &&
-            (
-              <Route
-                path="/trades"
-                element={
-                  <div>
-                    <Navbar onLogout={handleLogout} />
-                    <ListTrades />
-                    <Footer />
-                  </div>
-                }
-              />
-            )}
-            {isAuthenticated &&
-            (
-              <Route
-                path="/profile"
-                element={
-                  <div>
-                    <Navbar onLogout={handleLogout} />
-                    <Profile/>
-                    <Footer />
-                  </div>
-                }
-              />
-            )}
-            {isAuthenticated && (
-              <Route
-                path="/cointegration"
-                element={
-                  <div className="dataContainer">
-                    <Navbar onLogout={handleLogout} />
-                    <CointPairs onRowClick={handleRowClick} />
-                    <div className="chartPairs">
-                      {selectedRow && <MetricsCards rowData={selectedRow} />}
+          {isAuthenticated && (
+            <Route
+              path="/trades"
+              element={
+                <div>
+                  <Navbar onLogout={handleLogout} />
+                  <ListTrades />
+                  <Footer />
+                </div>
+              }
+            />
+          )}
+          {isAuthenticated && (
+            <Route
+              path="/profile"
+              element={
+                <div>
+                  <Navbar onLogout={handleLogout} />
+                  <Profile />
+                  <Footer />
+                </div>
+              }
+            />
+          )}
+          {isAuthenticated && (
+            <Route
+              path="/cointegration"
+              element={
+                <div className="dataContainer">
+                  <Navbar onLogout={handleLogout} />
+                  <div className="pairsContainer">
+                    <div className="firstData">
+                      <CointPairs onRowClick={handleRowClick} />
+                      {selectedRow && <MetricsCards rowData={selectedRow} />}  
+                    </div>
+                    
+                    <div className="dataContainer">
                       {selectedRow && (
-                        <div className="cointegrated">
-                          <CointegrationChart
-                            market1={selectedRow}
-                            market2={selectedRow}
-                          />
+                        <div className="zscore">
+                          <ZScoreChart rowData={selectedRow} />
                         </div>
                       )}
-                      <div className="metricsChart">
-                        {selectedRow && (
-                          <div className="zscore">
-                            <ZScoreChart rowData={selectedRow} />
-                          </div>
-                        )}
-                        {selectedRow && (
-                          <div className="spread">
-                            <SpreadChart rowData={selectedRow} />
-                          </div>
-                        )}
-                      </div>
+                      {selectedRow && (
+                        <div className="spread">
+                          <SpreadChart rowData={selectedRow} />
+                        </div>
+                      )}
                     </div>
-                    <Footer />
                   </div>
-                }
-              />
-            )}
+
+                  <div className="chartPairs">
+                    
+                    {selectedRow && (
+                      <div className="cointegrated">
+                        <CointegrationChart
+                          market1={selectedRow}
+                          market2={selectedRow}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <Footer />
+                </div>
+              }
+            />
+          )}
         </Routes>
       </div>
     </Router>

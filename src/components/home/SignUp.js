@@ -8,23 +8,22 @@ import axios from "axios";
 import Toast from "react-bootstrap/Toast";
 import { useNavigate } from "react-router-dom";
 
-
 export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [showToast, setShowToast] = useState(false);
-  const [toastHeader, setToastHeader] = useState("")
+  const [toastHeader, setToastHeader] = useState("");
   const [toastMessage, setToastMessage] = useState("");
-  const [toastColor, setToastColor] = useState("")
+  const [toastColor, setToastColor] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
 
   const navigate = useNavigate();
 
   const hideToast = useCallback(() => {
     setShowToast(false);
-    navigate('/login');
+    navigate("/login");
   }, [navigate]);
 
   useEffect(() => {
@@ -35,7 +34,6 @@ export const SignUp = () => {
 
       return () => {
         clearTimeout(timer);
-        
       };
     }
   }, [showToast, hideToast, navigate]);
@@ -58,34 +56,36 @@ export const SignUp = () => {
     event.preventDefault();
     if (isFormValid) {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/register/", {
-          email: email,
-          username: username,
-          password: password,
-          repeat_password: repeatPassword,
-      }, {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/register/",
+          {
+            email: email,
+            username: username,
+            password: password,
+            repeat_password: repeatPassword,
+          },
+          {
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
-          });
+          }
+        );
 
         console.log(response.data);
-        setToastColor("rgb(159, 201, 76)")
-        setToastHeader("Register")
+        setToastColor("rgb(159, 201, 76)");
+        setToastHeader("Register");
         setToastMessage("Register Succesfull!!");
-        setShowToast(true)
+        setShowToast(true);
         setEmail("");
         setUsername("");
         setPassword("");
         setRepeatPassword("");
-        
-
       } catch (error) {
         console.error("Error during registration:", error.response);
         console.error("Error details:", error.response.data);
       }
     } else {
-      setToastColor('#ff4a4a')
+      setToastColor("#ff4a4a");
       setToastMessage("Please fill out all fields and ensure passwords match.");
       setShowToast(true);
     }
@@ -95,26 +95,26 @@ export const SignUp = () => {
     <div className={styles.loginContainer}>
       <NavMenu />
       <Toast
-  show={showToast}
-  onClose={() => setShowToast(false)}
-  style={{
-    position: "fixed",
-    top: "20%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    zIndex: 1000,
-    opacity: 1, // Agregar esta línea para eliminar la opacidad
-    backgroundColor: toastColor,
-    color: "white",
-    
-     // Cambiar el color de fondo del header
-  }} 
->
-  <Toast.Header>
-    <strong className="mr-auto">{toastHeader}</strong>
-  </Toast.Header>
-  <Toast.Body>{toastMessage}</Toast.Body>
-</Toast>
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        style={{
+          position: "fixed",
+          top: "20%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1000,
+          opacity: 1, // Agregar esta línea para eliminar la opacidad
+          backgroundColor: toastColor,
+          color: "white",
+
+          // Cambiar el color de fondo del header
+        }}
+      >
+        <Toast.Header>
+          <strong className="mr-auto">{toastHeader}</strong>
+        </Toast.Header>
+        <Toast.Body>{toastMessage}</Toast.Body>
+      </Toast>
       <div className={styles.formContainer}>
         <div className={styles.backForm}>
           <Form className={styles.form} onSubmit={handleSubmit}>

@@ -23,6 +23,9 @@ ChartJS.register(
 );
 export function SpreadChart({ rowData }) {
 
+  const mostRecentSpread = rowData.Spread[rowData.Spread.length - 1];
+  const spreadText = `Spread ${mostRecentSpread.toFixed(4)}`;
+
 const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -60,7 +63,7 @@ const options = {
     },
     title: {
       display: true,
-      text: 'Spread',
+      text: spreadText,
       color: 'white', // Cambia el color del texto del título
       font: {
         size: 24, // Cambia el tamaño del texto del título

@@ -6,7 +6,8 @@ import "../home/NavMenu.module.css";
 import { NavMenu } from "../home/NavMenu";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/actions"; // Asegúrate de importar la acción 'login' que definimos anteriormente
+import { login } from "../../store/actions"; 
+import { Link } from 'react-router-dom';
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -56,6 +57,8 @@ export const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
+            <Link className={styles.passwordRecovery}>Forgot your password?</Link>
+            <hr></hr>
             <Button className={styles.buttonStart} variant="primary" type="submit">
               Submit
             </Button>
