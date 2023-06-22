@@ -5,6 +5,7 @@ export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
+export const SELECT_PAIR = 'SELECT_PAIR';
 
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
@@ -39,4 +40,11 @@ export const login = (email, password) => {
       dispatch(loginFailure(error.response.data.message));
     }
   };
+};
+
+export const selectPair = (pair) => {
+  return {
+      type: SELECT_PAIR,
+      payload: pair,
+  }
 };

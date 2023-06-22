@@ -27,3 +27,9 @@
     font-size: 0.8rem;
     padding-top: 1%;
   }
+
+  @media only screen and (max-width: 820px) {
+    .Footer{
+      margin-left: 4%;
+    }
+  }

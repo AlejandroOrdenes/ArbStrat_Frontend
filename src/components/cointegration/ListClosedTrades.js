@@ -123,7 +123,7 @@ export const ListTrades = ({ onRowClick }) => {
     console.log("Ejecutando Busqueda pares!!");
     console.log(token);
     try {
-      const response = await axios.get("http://127.0.0.1:8000/getTrades/", {
+      const response = await axios.get("http://127.0.0.1:8000/getClosedTrades/", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -140,118 +140,6 @@ export const ListTrades = ({ onRowClick }) => {
 
   };
 
-  const getCurrentPrices = async (id) => {
-    console.log("Ejecutando búsqueda de precios!!");
-    try {
-      const response = await axios.get(
-        "http://127.0.0.1:8000/currentPrices/" + id
-      );
-      setCurrentPrices((prevCurrentPrices) => ({
-        ...prevCurrentPrices,
-        [id]: {
-          coin1: response.data.price1.toFixed(5),
-          coin2: response.data.price2.toFixed(5),
-        },
-      }));
-      console.log("CURRENT PRICES");
-      console.log(response.data.price1);
-      console.log(response.data.price2);
-    } catch (error) {
-      console.error("Error al obtener los datos:", error);
-    }
-  };
-
-  const closeTrade = async (tradeData) => {
-
-    
-    console.log("Closing trade...")
-    console.log(tradeData)
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/saveCloseTrade/",
-        {
-            coin1: tradeData.coin1,
-            amount1: tradeData.amount1,
-            price1: tradeData.price1,
-            profit1: tradeData.profit1,
-            coin2: tradeData.coin2,
-            amount2: tradeData.amount2,
-            price2: tradeData.price2,
-            profit2: tradeData.profit2,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "X-Requested-With": "XMLHttpRequest",
-          },
-          withCredentials: true,
-        }
-      );
-      console.log(response.data);
-      if(response.status === 200) {
-        try {
-          const response = await axios.post(
-            "http://localhost:8000/closeTrade/",
-            {
-              id: tradeData.id,
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-                "X-Requested-With": "XMLHttpRequest",
-              },
-              withCredentials: true,
-            }
-          );
-          console.log(response.data);
-          await fetchData();
-        } catch (error) {
-          console.error("Error sending data to backend:", error);
-        }
-      }
-    } catch (error) {
-      console.error("Error saving data to backend:", error);
-    }
-  }
-
-  // const calculateNetProfits = () => {
-  //   return data.map((trade) => {
-  //     const isShort1 = trade.direction === "short";
-  //     const isLong2 = !isShort1;
-
-  //     const entryPrice1 = parseFloat(trade.price1);
-  //     const entryPrice2 = parseFloat(trade.price2);
-  //     const currentPrice1 = currentPrices[trade.idPair]?.coin1;
-  //     const currentPrice2 = currentPrices[trade.idPair]?.coin2;
-  //     const cantidad1 = parseFloat(trade.amount1);
-  //     const cantidad2 = parseFloat(trade.amount2);
-
-  //     const netProfit1 = currentPrice1
-  //       ? isShort1
-  //         ? cantidad1 * (1 - currentPrice1 / entryPrice1)
-  //         : cantidad1 * (currentPrice1 / entryPrice1 - 1)
-  //       : null;
-
-  //     const netProfit2 = currentPrice2
-  //       ? isLong2
-  //         ? cantidad2 * (currentPrice2 / entryPrice2 - 1)
-  //         : cantidad2 * (1 - currentPrice2 / entryPrice2)
-  //       : null;
-
-  //     return {
-  //       id: trade.id,
-  //       netProfit1: netProfit1 !== null ? netProfit1.toFixed(2) : "N/A",
-  //       netProfit2: netProfit2 !== null ? netProfit2.toFixed(2) : "N/A",
-  //       isProfit1: netProfit1 > 0,
-  //       isProfit2: netProfit2 > 0,
-  //     };
-  //   });
-  // };
-
-  // const netProfits = calculateNetProfits();
 
   return (
     <div className={styles.pairsList}>
@@ -263,7 +151,7 @@ export const ListTrades = ({ onRowClick }) => {
           <div className={styles.tableDataContainer}>
             <div className={styles.headTrades}>
               <h4>Trades</h4>
-              {/* <Button bsStyle="primary">Closed Trades</Button> */}
+              <Button bsStyle="primary">Closed Trades</Button>
             </div>
             
             <div className={styles.dataTable}>
@@ -380,10 +268,3 @@ export const ListTrades = ({ onRowClick }) => {
   );
 };
 
-// direction: direction,
-//           coin1: rowData.Crypto1_ID,
-//           coin2: rowData.Crypto2_ID,
-//           price1: rowData.last_price_1,
-//           price2: rowData.last_price_2,
-//           amount1: value1,
-//           amount2: value2,

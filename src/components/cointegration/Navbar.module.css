@@ -19,7 +19,7 @@ li {
   list-style: none;
   color: rgb(158, 158, 158);
   font-size: 1.5vw;
-  padding-top: 40%;
+  margin-top: 40%;
   transition: 0.5s;
 }
 
@@ -27,19 +27,50 @@ li {
   color: rgb(158, 158, 158);
 }
 
+
 .icon a {
   color: rgb(158, 158, 158);
   text-decoration: none;
 }
 
 .icon a.active {
-  color: greenyellow;
+  color: greenyellow !important;  /* Agrega el !important aquí */
   transition: 0.5s;
   cursor: pointer;
 }
 
-.icon a.active {
-  background-color: yellowgreen;
+.ulIcon {
+  display: flex;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+@media (max-width: 820px) {
 
+  .ulIcon {
+    flex-direction: initial;
+    justify-content: space-around;
+    margin: 0;
+  }
+
+  .Navbar {
+    background-color: rgb(77, 77, 77);
+    width: 40vw;
+    color: white;
+    margin-left: 4%;
+    margin-top: 3%;
+    position: initial;
+    border-radius: 8px;
+  }
+
+  li {
+    list-style: none;
+    color: rgb(158, 158, 158);
+    font-size: 5.5vw;
+    padding: 4%;
+    margin: 0;
+    transition: 0.5s;
+  }
+}

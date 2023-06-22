@@ -147,11 +147,11 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
   };
 
   return (
-    <Modal
+    <Modal className={styles.modalComplete}
       show={showModal}
       onHide={handleCloseModal}
       size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
+      aria-labelledby="contained-modal-title-vtop"
       centered
     >
       <Toast
@@ -199,7 +199,7 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
               <div class="card-body" className={styles.cards}>
                 <h5 class="card-title">Z-Score</h5>
                 <p class="card-text">
-                  {rowData.z_score[rowData.z_score.length - 1]}
+                  {rowData.z_score[rowData.z_score.length - 1].toFixed(2)}
                 </p>
               </div>
             </div>
@@ -209,7 +209,7 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
               <div class="card-body" className={styles.cards}>
                 <h5 class="card-title">Spread</h5>
                 <p class="card-text">
-                  {rowData.Spread[rowData.Spread.length - 1]}
+                  {rowData.Spread[rowData.Spread.length - 1].toFixed(2)}
                 </p>
               </div>
             </div>
@@ -219,7 +219,7 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
               <div class="card-body" className={styles.cards}>
                 <h5 class="card-title">Hedge Ratio</h5>
                 <p class="card-text">
-                  {parseFloat(rowData.hedge_ratio).toFixed(4)}
+                  {parseFloat(rowData.hedge_ratio).toFixed(2)}
                 </p>
               </div>
             </div>
@@ -231,6 +231,7 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
           <div>
             <h5>{rowData.Crypto1_ID}</h5>
             <input
+            className={styles.tradesInput}
               type="number"
               value={price1}
               onChange={(event) => handlePriceChange(event, rowData.Crypto1_ID)}
@@ -245,6 +246,7 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
           <div>
             <h5>{rowData.Crypto2_ID}</h5>
             <input
+            className={styles.tradesInput}
               type="number"
               value={price2}
               onChange={(event) => handlePriceChange(event, rowData.Crypto2_ID)}

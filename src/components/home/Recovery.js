@@ -6,25 +6,18 @@ import "../home/NavMenu.module.css";
 import { NavMenu } from "../home/NavMenu";
 import axios from "axios";
 import Toast from "react-bootstrap/Toast";
-import { useNavigate } from "react-router-dom";
 
-export const SignUp = () => {
+export const Recovery = () => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [toastHeader, setToastHeader] = useState("");
   const [toastMessage, setToastMessage] = useState("");
   const [toastColor, setToastColor] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const navigate = useNavigate();
-
   const hideToast = useCallback(() => {
     setShowToast(false);
-    navigate("/login");
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
     if (showToast) {
@@ -36,7 +29,7 @@ export const SignUp = () => {
         clearTimeout(timer);
       };
     }
-  }, [showToast, hideToast, navigate]);
+  }, [showToast, hideToast, useCallback]);
 
   const validateForm = useCallback(() => {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -45,21 +38,12 @@ export const SignUp = () => {
     if (!emailIsValid) {
       return false
     }
-    if (!email || !username || !password || !repeatPassword) {
+    if (!email) {
       return false;
-    }
-    if (password !== repeatPassword) {
-      return false;
-    }
-    const passRegex = /^(?=.*[A-Z])[^\s]{6,8}$/;
-    const passIsvalid = passRegex.test(password);
-
-    if(!passIsvalid) {
-      return false
     }
 
     return true;
-  }, [email, username, password, repeatPassword]);
+  }, [email]);
 
   useEffect(() => {
     setIsFormValid(validateForm());
@@ -68,14 +52,13 @@ export const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isFormValid) {
+      console.log(email)
       try {
+        
         const response = await axios.post(
-          "http://127.0.0.1:8000/register/",
+          "http://127.0.0.1:8000/recoveryPassword/",
           {
             email: email,
-            username: username,
-            password: password,
-            repeat_password: repeatPassword,
           },
           {
             headers: {
@@ -83,30 +66,29 @@ export const SignUp = () => {
             },
           }
         );
-
+        
         console.log(response.data);
         setToastColor("rgb(159, 201, 76)");
-        setToastHeader("Register");
-        setToastMessage("Register Succesfull!!");
+        setToastHeader("Recovery");
+        setToastMessage("Password recovery email sended!!");
         setShowToast(true);
         setEmail("");
-        setUsername("");
-        setPassword("");
-        setRepeatPassword("");
       } catch (error) {
         console.error("Error during registration:", error.response);
         console.error("Error details:", error.response.data);
+        setToastColor("#ff4a4a");
+        setToastMessage("Please fill out all fields and ensure email exist.");
+        setShowToast(true);
       }
     } else {
       setToastColor("#ff4a4a");
-      setToastMessage("Please fill out all fields and ensure passwords match.");
+      setToastMessage("Please fill out all fields and ensure email exist.");
       setShowToast(true);
     }
   };
 
   return (
     <div className={styles.loginContainer}>
-      <NavMenu />
       <Toast
         show={showToast}
         onClose={() => setShowToast(false)}
@@ -128,54 +110,27 @@ export const SignUp = () => {
         </Toast.Header>
         <Toast.Body>{toastMessage}</Toast.Body>
       </Toast>
+      <NavMenu />
       <div className={styles.formContainer}>
         <div className={styles.backForm}>
           <Form className={styles.form} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <h3>SignUp</h3>
+              <h3>Recovery Account</h3>
               <hr></hr>
-              <Form.Label>Email address</Form.Label>
+              <Form.Label className={styles.recoverText}>Enter your email address for recovery your password</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                maxLength={50}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                maxLength={20}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password - 6 digit and 1 uppercase"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                maxLength={8}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Repeat Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Repeat Password"
-                value={repeatPassword}
-                onChange={(e) => setRepeatPassword(e.target.value)}
-                maxLength={8}
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit" disabled={!isFormValid}>
-              Submit
+            
+            
+            <hr></hr>
+            <Button className={styles.sendEmailRecover} variant="primary" type="submit" disabled={!isFormValid}>
+              Send
             </Button>
           </Form>
         </div>

@@ -80,8 +80,8 @@ const data = {
     {
       label: `${rowData.Crypto1_ID} - ${rowData.Crypto2_ID}`,
       data: datos,
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      borderColor: '#0dcaf0',
+      backgroundColor: '#0dcaf0',
       borderWidth: 1, // Establecer el ancho de la línea
       pointRadius: 0, // Ocultar los puntos
     }, 

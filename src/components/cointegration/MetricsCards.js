@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styles from "../cointegration/MetricsCards.module.css"
 import { ModalSimulation } from "../cointegration/ModalSimulation";
 
-export const MetricsCards = ({ rowData, prices }) => {
+export const MetricsCards = ({ rowData }) => {
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal(true);
@@ -11,7 +11,7 @@ export const MetricsCards = ({ rowData, prices }) => {
   const closeModal = () => {
     setShowModal(false);
   };
-  const firstNonZeroValue = rowData.z_score.find((value) => value !== 0);
+  const firstNonZeroValue = rowData?.z_score?.find((value) => value !== 0);
   return (
     <div class="row">
       {/* <div class="col mb-3 mb-sm-0">
@@ -39,7 +39,7 @@ export const MetricsCards = ({ rowData, prices }) => {
           <div class="card-body" className={ styles.cards }>
             <h5 class="card-title">Hedge Ratio</h5>
             <p class="card-text">
-            {parseFloat(rowData.hedge_ratio).toFixed(4)}
+            {parseFloat(rowData?.hedge_ratio).toFixed(4)}
             </p>
           </div>
         </div>
@@ -50,7 +50,7 @@ export const MetricsCards = ({ rowData, prices }) => {
             <h5 class="card-title">Half Life</h5>
             
             <p class="card-text">
-              {rowData.half_life}
+              {rowData?.half_life}
             </p>
           </div>
         </div>
@@ -59,8 +59,9 @@ export const MetricsCards = ({ rowData, prices }) => {
         <div class="card" className={styles.card}>
           <div class="card-body" className={ styles.cards }>
           <button
+            
             type="button"
-            className="btn btn-outline-info"
+            className={`btn btn-outline-info ${styles.buttonSimulate}`}
             onClick={() => setShowModal(true)}
           >
             Arbitrage Simulate

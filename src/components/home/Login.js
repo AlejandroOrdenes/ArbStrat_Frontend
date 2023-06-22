@@ -4,19 +4,25 @@ import Form from "react-bootstrap/Form";
 import styles from "./Login.module.css";
 import "../home/NavMenu.module.css";
 import { NavMenu } from "../home/NavMenu";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/actions"; 
-import { Link } from 'react-router-dom';
+import { login } from "../../store/actions";
+
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  
+
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
   const isAuthenticated = useSelector((state) => state.auth.token !== null);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -51,22 +57,29 @@ export const Login = () => {
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              
             </Form.Group>
-            <Link className={styles.passwordRecovery}>Forgot your password?</Link>
+            <NavLink to="/recovery" className={styles.passwordRecovery}>
+              Forgot your password?
+            </NavLink>
             <hr></hr>
-            <Button className={styles.buttonStart} variant="primary" type="submit">
+            <Button
+              className={styles.buttonStart}
+              variant="primary"
+              type="submit"
+            >
               Submit
             </Button>
-            {error && <p>Error: {error}</p>} {/* Mostrar el mensaje de error si hay uno */}
+            {error && <p>Error: {error}</p>}{" "}
+            {/* Mostrar el mensaje de error si hay uno */}
           </Form>
         </div>
       </div>
     </div>
   );
 };
-

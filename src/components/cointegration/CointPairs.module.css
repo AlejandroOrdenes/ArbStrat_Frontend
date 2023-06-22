@@ -3,7 +3,7 @@
 .title {
     text-align: left;
     padding-left: 3%;
-    color: rgb(158, 158, 158);
+    color: rgb(206, 206, 206);
 }
 
 
@@ -33,7 +33,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 7.5%;
+    margin-bottom: 1.5%;
 
 }
 
@@ -42,10 +42,11 @@
     border-radius: 10px;
     color: rgb(219, 219, 219);
     width: 100%;
+    height: 67vh;
 }
 
 .dataTable {
-    max-height: calc(1.5 * 1.75rem * 11);
+    max-height: calc(1.5 * 1.75rem * 10);
     overflow-y: auto;
 }
 
@@ -61,9 +62,40 @@ th {
 thead th {
     position: sticky;
     top: 0;
-    background-color: #343a40; /* Asegúrate de que el color de fondo coincida con el de la tabla */
+    --bs-table-bg: rgb(48, 48, 48) !important;
+    font-size: large;
+    font-weight: bold;
   }
 
-  .table-dark tbody tr.rowSelected {
-    background-color: green !important;
+  .hoverCss {
+    cursor: pointer;
+    --bs-table-hover-bg: #57597a !important;
+   
+}
+
+.selectedRow {
+    --bs-table-bg: #3c4065 !important;
+    --bs-table-striped-bg: #3c4065 !important;
+    font-weight: bold;
+    font-style: italic;
   }
+
+.zscoreOrder {
+    transition: 0.5s;
+}
+
+.zscoreOrder:hover {
+    color: yellowgreen;
+    cursor: pointer;
+    
+}
+
+/* RESPONSIVE */
+
+@media only screen and (max-width: 820px) {
+    
+    .table {
+        height: auto;
+    }
+}
+  

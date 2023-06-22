@@ -17,12 +17,15 @@ import { logout } from "../../front/src/store/actions.js";
 import { SignUp } from "./components/home/SignUp.js";
 import { useSelector } from "react-redux";
 import { About } from "./components/home/About.js";
+import { Verify } from "./components/profile/Verify.js";
+import { Recovery } from "./components/home/Recovery.js";
 
 function App() {
   const [selectedRow, setSelectedRow] = useState(null);
   const isAuthenticated = useSelector((state) => state.auth.token !== null);
 
   const handleRowClick = (row) => {
+    console.log(row)
     setSelectedRow(row);
   };
 
@@ -46,15 +49,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/recovery" element={<Recovery />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
+          <Route path="/verify" element={<Verify />} />
           {isAuthenticated && (
             <Route
               path="/trades"
               element={
                 <div>
                   <Navbar onLogout={handleLogout} />
-                  <ListTrades />
+                  <ListTrades onRowClick={handleRowClick}/>
                   <Footer />
                 </div>
               }
@@ -80,7 +85,8 @@ function App() {
                   <Navbar onLogout={handleLogout} />
                   <div className="pairsContainer">
                     <div className="firstData">
-                      <CointPairs onRowClick={handleRowClick} />
+                      <CointPairs onRowClick={handleRowClick} selectedRow={selectedRow}/>
+                      
                       {selectedRow && <MetricsCards rowData={selectedRow} />}  
                     </div>
                     
