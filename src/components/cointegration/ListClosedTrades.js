@@ -75,7 +75,6 @@ export const ListTrades = ({ onRowClick }) => {
       .then((data) => {
         setUserName(data.username);
         setImage(data.image_profile);
-        console.log(data.image_profile);
       })
 
       .catch((error) => {
@@ -95,14 +94,6 @@ export const ListTrades = ({ onRowClick }) => {
           getCurrentPrices(trade.idPair)
         );
         await Promise.all(pricePromises);
-
-        // Realiza cualquier otro cálculo o manipulación de los datos aquí
-
-        console.log(
-          "Precios y ganancias actualizados:",
-          currentPrices
-          // netProfits
-        );
       };
 
       // Ejecuta fetchCurrentPricesForAllPairs al cargar inicialmente los datos
@@ -120,8 +111,6 @@ export const ListTrades = ({ onRowClick }) => {
   }, [data]);
 
   const fetchData = async () => {
-    console.log("Ejecutando Busqueda pares!!");
-    console.log(token);
     try {
       const response = await axios.get("http://127.0.0.1:8000/getClosedTrades/", {
         headers: {
@@ -132,8 +121,6 @@ export const ListTrades = ({ onRowClick }) => {
         withCredentials: true,
       });
       setData(response.data);
-      console.log("DATA");
-      console.log(response.data);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }

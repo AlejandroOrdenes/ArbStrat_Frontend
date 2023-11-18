@@ -25,7 +25,6 @@ function App() {
   const isAuthenticated = useSelector((state) => state.auth.token !== null);
 
   const handleRowClick = (row) => {
-    console.log(row)
     setSelectedRow(row);
   };
 

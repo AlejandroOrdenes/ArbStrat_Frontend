@@ -120,7 +120,6 @@ export const ListTrades = ({ onRowClick }) => {
       .then((data) => {
         setUserName(data.username);
         setImage(data.image_profile);
-        console.log(data.image_profile);
       })
 
       .catch((error) => {
@@ -140,14 +139,6 @@ export const ListTrades = ({ onRowClick }) => {
           getCurrentPrices(trade.idPair)
         );
         await Promise.all(pricePromises);
-
-        // Realiza cualquier otro cálculo o manipulación de los datos aquí
-
-        console.log(
-          "Precios y ganancias actualizados:",
-          currentPrices
-          // netProfits
-        );
       };
 
       // Ejecuta fetchCurrentPricesForAllPairs al cargar inicialmente los datos
@@ -165,7 +156,6 @@ export const ListTrades = ({ onRowClick }) => {
   }, [data]);
 
   const fetchData = async () => {
-    console.log("Ejecutando Busqueda pares!!");
     try {
       const response = await axios.get("http://127.0.0.1:8000/getTrades/", {
         headers: {
@@ -176,15 +166,12 @@ export const ListTrades = ({ onRowClick }) => {
         withCredentials: true,
       });
       setData(response.data);
-      console.log("DATA Trades");
-      console.log(response.data);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
 
   const getHistorical = async () => {
-    console.log("Ejecutando Busqueda historicos!!");
     try {
       const response = await axios.get(
         "http://127.0.0.1:8000/getClosedTrades/",
@@ -198,15 +185,12 @@ export const ListTrades = ({ onRowClick }) => {
         }
       );
       setDataHistorical(response.data);
-      console.log("DATA closed trades!");
-      console.log(response.data);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
 
   const getCurrentPrices = async (id) => {
-    console.log("Ejecutando búsqueda de precios!!");
     try {
       const response = await axios.get(
         "http://127.0.0.1:8000/currentPrices/" + id
@@ -218,18 +202,12 @@ export const ListTrades = ({ onRowClick }) => {
           coin2: response.data.price2.toFixed(5),
         },
       }));
-      console.log("CURRENT PRICES");
-      console.log(response.data.price1);
-      console.log(response.data.price2);
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
   };
 
   const closeTrade = async (tradeData) => {
-    console.log("Closing trade...");
-    console.log(tradeData);
-
     try {
       const response = await axios.post(
         "http://localhost:8000/saveCloseTrade/",
@@ -252,7 +230,6 @@ export const ListTrades = ({ onRowClick }) => {
           withCredentials: true,
         }
       );
-      console.log(response.data);
       if (response.status === 200) {
         try {
           const response = await axios.post(
@@ -269,7 +246,6 @@ export const ListTrades = ({ onRowClick }) => {
               withCredentials: true,
             }
           );
-          console.log(response.data);
           await fetchData();
         } catch (error) {
           console.error("Error sending data to backend:", error);

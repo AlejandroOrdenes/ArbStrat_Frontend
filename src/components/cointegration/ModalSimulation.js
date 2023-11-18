@@ -101,11 +101,6 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
   };
 
   const handlePlaceTradesClick = async () => {
-    console.log(rowData)
-    console.log(token)
-    console.log(rowData.Crypto1_ID)
-    console.log(rowData.Crypto2_ID)
-    console.log(rowData.id)
     try {
       const response = await axios.post(
         "http://localhost:8000/simulateTrades/",
@@ -131,7 +126,6 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
           withCredentials: true,
         }
       );
-      console.log(response.data);
       setShowToast(true)
       setToastColor("yellowgreen")
       setToastHeader("Trade OK")

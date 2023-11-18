@@ -72,7 +72,6 @@ export const Password = () => {
           }
         );
 
-        console.log(response.data);
         setToastColor("rgb(159, 201, 76)");
         setToastHeader("Register");
         setToastMessage("Password Updated Succesfull!!");

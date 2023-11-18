@@ -52,7 +52,6 @@ export const Recovery = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isFormValid) {
-      console.log(email)
       try {
         
         const response = await axios.post(
@@ -67,7 +66,6 @@ export const Recovery = () => {
           }
         );
         
-        console.log(response.data);
         setToastColor("rgb(159, 201, 76)");
         setToastHeader("Recovery");
         setToastMessage("Password recovery email sended!!");

@@ -84,7 +84,6 @@ export const SignUp = () => {
           }
         );
 
-        console.log(response.data);
         setToastColor("rgb(159, 201, 76)");
         setToastHeader("Register");
         setToastMessage(`Register Succesfull: ${response.data.message}`);
@@ -96,7 +95,6 @@ export const SignUp = () => {
         
       } catch (error) {
         const errorMessage = error.response.data.message;
-        console.log(errorMessage); 
         setToastColor("#ff4a4a");
         setToastMessage(`Error details: ${errorMessage}`);
         setShowToast(true);

@@ -65,11 +65,7 @@ export const UserData = () => {
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     setImage(URL.createObjectURL(file));
-    console.log(file);
     if (file && file.type.substr(0, 5) === "image") {
-      console.log("ES IMAGEN");
-
-      console.log(image);
       // Create a new FormData instance
       const formData = new FormData();
       formData.append("profile_picture", file);
@@ -85,9 +81,8 @@ export const UserData = () => {
           }
         );
 
-        console.log(response);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     e.target.value = null;
@@ -106,9 +101,8 @@ export const UserData = () => {
         }
       );
       setImage(null);
-      console.log(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -132,7 +126,6 @@ export const UserData = () => {
     event.preventDefault();
     if (isNameChanged) {
       try {
-        console.log(email);
         const response = await axios.post(
           "http://127.0.0.1:8000/userUpdate/",
           {
@@ -145,9 +138,6 @@ export const UserData = () => {
             },
           }
         );
-
-        console.log(response.data);
-        console.log("entro a username");
         setToastColor("rgb(159, 201, 76)");
         setToastHeader("Change UserName");
         setToastMessage("UserName Updated Succesfully!!");
@@ -163,7 +153,6 @@ export const UserData = () => {
     }
     // if (isEmailChanged) {
     //   try {
-    //     console.log(email);
     //     const response = await axios.post(
     //       "http://127.0.0.1:8000/emailUpdate/",
     //       {
@@ -195,16 +184,13 @@ export const UserData = () => {
     //   setName(name);
     //   setIsEmailChanged(false);
     //   setIsNameChanged(false);
-    //   console.log("entro a ambos");
     // } else if (isNameChanged) {
-    //   console.log("entro a username");
     //   setToastColor("rgb(159, 201, 76)");
     //   setToastHeader("Change UserName");
     //   setToastMessage("UserName Updated Succesfully!!");
     //   setShowToast(true);
     //   setName(name);
     // } else if (isEmailChanged) {
-    //   console.log("entro a email");
     //   setToastColor("rgb(159, 201, 76)");
     //   setToastHeader("Change UserName");
     //   setToastMessage("Email Updated Succesfully!!");

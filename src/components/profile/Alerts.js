@@ -41,12 +41,11 @@ export const Alerts = () => {
         },
       })
       .then((response) => {
-        console.log(response.data)
         setEmailAlert(isChecked)
         
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
       });
   };
 
@@ -66,11 +65,10 @@ export const Alerts = () => {
         },
       })
       .then((response) => {
-        console.log(response.data)
         setDiscordAlert(isChecked)
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
       });
   };
 

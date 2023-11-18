@@ -25,9 +25,7 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
   }, [selectedRow]);
 
   useEffect(() => {
-    fetchData();
-    console.log("IPDPAIR!!!!!!!!!!!!!!!!")
-    
+    fetchData();    
   }, []);
 
   const handleZScoreOrder = () => {
@@ -66,7 +64,6 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
   }, [data]);
 
   const handleRowClick = (id, index) => {
-    console.log(`Clicked on id ${id}`);
     setSelectedPairID(id);
     localStorage.setItem(KEY_SELECTED_PAIR_ID, id.toString());
     const selectedRow = newOrder[index];
