@@ -27,6 +27,6 @@ export const Verify = (props) => {
   }
 
   // Mientras la verificación está en proceso, puedes mostrar un spinner o algún otro indicador de carga
-  return <div>Verificando...</div>;
+  return <div>The account has already been verified. <a><Navigate to="/login" /></a></div>;
 }
 

@@ -96,7 +96,8 @@ export const UserData = () => {
   const handleDeletePhoto = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/deleteUserImage/",{},
+        "http://127.0.0.1:8000/deleteUserImage/",
+        {},
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -146,61 +147,70 @@ export const UserData = () => {
         );
 
         console.log(response.data);
+        console.log("entro a username");
+        setToastColor("rgb(159, 201, 76)");
+        setToastHeader("Change UserName");
+        setToastMessage("UserName Updated Succesfully!!");
+        setShowToast(true);
+        setName(name);
       } catch (error) {
+        setToastColor("#ff4a4a");
+        setToastMessage(`Error: ${error.response.data.message}`);
+        setShowToast(true);
         console.error("Error during registration:", error.response);
         console.error("Error details:", error.response.data);
       }
     }
-    if (isEmailChanged) {
-      try {
-        console.log(email);
-        const response = await axios.post(
-          "http://127.0.0.1:8000/emailUpdate/",
-          {
-            email: email,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-      } catch (error) {
-        console.error("Error during registration:", error.response);
-        console.error("Error details:", error.response.data);
-      }
-    } else {
-      setToastColor("#ff4a4a");
-      setToastMessage("Please fill out all fields");
-      setShowToast(true);
-    }
+    // if (isEmailChanged) {
+    //   try {
+    //     console.log(email);
+    //     const response = await axios.post(
+    //       "http://127.0.0.1:8000/emailUpdate/",
+    //       {
+    //         email: email,
+    //       },
+    //       {
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           Authorization: `Bearer ${token}`,
+    //         },
+    //       }
+    //     );
+    //   } catch (error) {
+    //     console.error("Error during registration:", error.response);
+    //     console.error("Error details:", error.response.data);
+    //   }
+    // } else {
+    //   setToastColor("#ff4a4a");
+    //   setToastMessage("Please fill out all fields");
+    //   setShowToast(true);
+    // }
 
-    if (isNameChanged && isEmailChanged) {
-      setToastColor("rgb(159, 201, 76)");
-      setToastHeader("Change UserName");
-      setToastMessage("Update Username and Email Succesfull!!");
-      setShowToast(true);
-      setEmail(email);
-      setName(name);
-      setIsEmailChanged(false);
-      setIsNameChanged(false);
-      console.log("entro a ambos");
-    } else if (isNameChanged) {
-      console.log("entro a username");
-      setToastColor("rgb(159, 201, 76)");
-      setToastHeader("Change UserName");
-      setToastMessage("UserName Updated Succesfully!!");
-      setShowToast(true);
-      setName(name);
-    } else if (isEmailChanged) {
-      console.log("entro a email");
-      setToastColor("rgb(159, 201, 76)");
-      setToastHeader("Change UserName");
-      setToastMessage("Email Updated Succesfully!!");
-      setShowToast(true);
-      setEmail(email);
-    }
+    // if (isNameChanged && isEmailChanged) {
+    //   setToastColor("rgb(159, 201, 76)");
+    //   setToastHeader("Change UserName");
+    //   setToastMessage("Update Username and Email Succesfull!!");
+    //   setShowToast(true);
+    //   setEmail(email);
+    //   setName(name);
+    //   setIsEmailChanged(false);
+    //   setIsNameChanged(false);
+    //   console.log("entro a ambos");
+    // } else if (isNameChanged) {
+    //   console.log("entro a username");
+    //   setToastColor("rgb(159, 201, 76)");
+    //   setToastHeader("Change UserName");
+    //   setToastMessage("UserName Updated Succesfully!!");
+    //   setShowToast(true);
+    //   setName(name);
+    // } else if (isEmailChanged) {
+    //   console.log("entro a email");
+    //   setToastColor("rgb(159, 201, 76)");
+    //   setToastHeader("Change UserName");
+    //   setToastMessage("Email Updated Succesfully!!");
+    //   setShowToast(true);
+    //   setEmail(email);
+    // }
 
     setIsEmailChanged(false);
     setIsNameChanged(false);
@@ -269,7 +279,7 @@ export const UserData = () => {
             type="email"
             placeholder={email}
             value={email}
-            onChange={handleEmailChange}
+            disabled
           />
         </Form.Group>
 

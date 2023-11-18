@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import styles from "./Login.module.css";
@@ -7,7 +7,7 @@ import { NavMenu } from "../home/NavMenu";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/actions";
-
+import Toast from "react-bootstrap/Toast";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,19 +17,57 @@ export const Login = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.auth.error);
   const isAuthenticated = useSelector((state) => state.auth.token !== null);
-
+  const [showToast, setShowToast] = useState(false);
+  const [toastHeader, setToastHeader] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastColor, setToastColor] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const hideToast = useCallback(() => {
+    setShowToast(false);
+  }, []);
+
+  const validateForm = useCallback(() => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    let emailIsValid = regex.test(email);
+
+    if (!emailIsValid) {
+      return false;
+    }
+    if (!email || !password) {
+      return false;
+    }
+
+    return true;
+  }, [email, password]);
 
   useEffect(() => {
+    if (error) {
+      setToastColor("#ff4a4a");
+      setToastMessage("User doesn´t exist!");
+      setShowToast(true);
+      setEmail("");
+      setPassword("");
+
+      // Ocultar el Toast después de 2 segundos
+      const timer = setTimeout(() => {
+        hideToast();
+      }, 2000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
     if (isAuthenticated) {
       // Si el usuario está autenticado, redirígelo a la ruta deseada
       navigate("/cointegration"); // Reemplaza '/cointegration' con la ruta a la que deseas redirigir
     }
-  }, [isAuthenticated, navigate]);
+  }, [error, isAuthenticated, navigate]);
+
+  useEffect(() => {
+    setIsFormValid(validateForm());
+  }, [showToast, validateForm]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,6 +76,25 @@ export const Login = () => {
 
   return (
     <div className={styles.loginContainer}>
+      <Toast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        style={{
+          position: "fixed",
+          top: "20%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1000,
+          opacity: 1, // Agregar esta línea para eliminar la opacidad
+          backgroundColor: toastColor,
+          color: "white",
+        }}
+      >
+        <Toast.Header>
+          <strong className="mr-auto">{toastHeader}</strong>
+        </Toast.Header>
+        <Toast.Body>{toastMessage}</Toast.Body>
+      </Toast>
       <NavMenu />
       <div className={styles.formContainer}>
         <div className={styles.backForm}>
@@ -62,7 +119,6 @@ export const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              
             </Form.Group>
             <NavLink to="/recovery" className={styles.passwordRecovery}>
               Forgot your password?
@@ -72,10 +128,11 @@ export const Login = () => {
               className={styles.buttonStart}
               variant="primary"
               type="submit"
+              disabled={!isFormValid}
             >
               Submit
             </Button>
-            {error && <p>Error: {error}</p>}{" "}
+            {/* {error && <p>Error: {error}</p>}{" "} */}
             {/* Mostrar el mensaje de error si hay uno */}
           </Form>
         </div>

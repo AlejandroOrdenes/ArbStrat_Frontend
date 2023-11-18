@@ -13,10 +13,10 @@ export const Alerts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getUserAlerts/", {  // Asegúrate de que la URL sea correcta
+      .get("http://localhost:8000/getUserAlerts/", {  
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,  // Incluye el token en las cabeceras
+          Authorization: `Bearer ${token}`,  
         },
       })
       .then((response) => {
@@ -101,6 +101,7 @@ export const Alerts = () => {
               onChange={handleDiscordAlertChange}
               disabled={true}
             />
+            <h6>Comming Soon!</h6>
           </Form.Group>
           <Form.Group className="mb-3" controlId="emailAlert">
             <Form.Check

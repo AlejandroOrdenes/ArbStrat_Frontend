@@ -22,6 +22,9 @@ export const About = () => {
               <br></br>
               Join us and gain the edge in your crypto arbitrage trading
               journey.
+              <br></br>
+              <br></br>
+              Contact us to arbstratcrypto@gmail.com
             </p>
           </div>
         </div>
