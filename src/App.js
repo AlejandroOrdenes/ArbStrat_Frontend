@@ -5,6 +5,7 @@ import { CointPairs } from "./components/cointegration/CointPairs.js";
 import { CointegrationChart } from "./components/cointegration/CointegrationChart.js";
 import { MetricsCards } from "./components/cointegration/MetricsCards.js";
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { ZScoreChart } from "./components/cointegration/ZScoreChart.js";
 import { SpreadChart } from "./components/cointegration/SpreadChart.js";
 import { Footer } from "./components/cointegration/Footer.js";
@@ -13,7 +14,7 @@ import { Home } from "./components/home/Home.js";
 import { Login } from "./components/home/Login.js";
 import { Profile } from "./components/profile/Profile.js";
 import { useDispatch } from "react-redux";
-import { logout } from "../../front/src/store/actions.js";
+import { logout } from "./store/actions.js";
 import { SignUp } from "./components/home/SignUp.js";
 import { useSelector } from "react-redux";
 import { About } from "./components/home/About.js";
@@ -46,12 +47,12 @@ function App() {
       {/* {isAuthenticated && } */}
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/recovery" element={<Recovery />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/verify" element={<Verify />} />
+          <Route exact path="login" element={<Login />} />
+          <Route exact path="recovery" element={<Recovery />} />
+          <Route exact path="signup" element={<SignUp />} />
+          <Route exact path="about" element={<About />} />
+          <Route exact path="verify" element={<Verify />} />
+          <Route exact path="/" element={<Home />} />
           {isAuthenticated && (
             <Route
               path="/trades"

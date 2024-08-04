@@ -87,7 +87,6 @@ export const CointegrationChart = ({ market1, market2 }) => {
           const data2 = response2.data[0];
 
           setApiData([data1, data2]);
-          
         }
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -140,7 +139,7 @@ export const CointegrationChart = ({ market1, market2 }) => {
     <div className={styles.chartContainer}>
       {isLoading ? (
         <RingLoader
-        color="#36d7b7"
+          color="#36d7b7"
           loading={isLoading}
           css={spinnerStyle}
           size={150}

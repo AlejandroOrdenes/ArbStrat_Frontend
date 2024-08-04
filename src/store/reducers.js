@@ -1,5 +1,5 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT,  } from "./actions";
-import { SELECT_PAIR } from './actions';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT,  } from "./actions.js";
+import { SELECT_PAIR } from './actions.js';
 
 const initialState = {
   selectedPair: null,

@@ -1,9 +1,7 @@
-import Table from "react-bootstrap/Table";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../cointegration/ListTrades.module.css";
 import { useSelector } from "react-redux";
-import Form from "react-bootstrap/Form";
 import { BsPersonCircle } from "react-icons/bs";
 import { ChartListTrades } from "./ChartListTrades";
 import { useNavigate } from 'react-router-dom';

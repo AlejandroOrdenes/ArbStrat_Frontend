@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { css } from "@emotion/react";
+import { RingLoader } from "react-spinners";
 import styles from "../cointegration/CointPairs.module.css";
 import {
   BsFillArrowDownCircleFill,
@@ -16,6 +18,7 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
   const [filteredRows, setFilteredRows] = useState([]);
   const [order, setOrder] = useState("asc");
   const [newOrder, setNewOrder] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Define el estado isLoading
 
   useEffect(() => {
     if (selectedRow && selectedRow.id) {
@@ -33,6 +36,7 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
   };
 
   const fetchData = async () => {
+    setIsLoading(true); // Inicia la carga
     try {
       const response = await axios.get(
         "http://127.0.0.1:8000/cointegratedPairs/"
@@ -42,6 +46,7 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
     } catch (error) {
       console.error("Error al obtener los datos:", error);
     }
+    setIsLoading(false); // Inicia la carga
   };
 
   useEffect(() => {
@@ -105,40 +110,46 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
     ));
   };
 
-  return (
-    // <div className={styles.pairsList}>
-    <div className={styles.tableContainer}>
-      {/* <div className={styles.titleContainer}>
-          <h1 className={styles.title}>ArbStrat Crypto</h1>
-        </div> */}
+  const spinnerStyle = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  height: 100%; 
+  
+`;
 
-      <div className={styles.table}>
-        <h4 className={styles.title}>Cointegrated Pairs</h4>
-        <div className={styles.dataTable}>
-          <table class="table table-dark table-striped table-hover">
-            <thead>
-              <tr>
-                {/* <th scope="col">N°</th>
-                  <th scope="col">Date</th> */}
-                <th scope="col">N°</th>
-                <th scope="col">Base Market</th>
-                <th scope="col">Quote Market</th>
-                <th scope="col">
-                  ZScore{" "}
-                  {order === "asc" ? (
-          <BsFillArrowDownCircleFill className={styles.zscoreOrder} onClick={handleZScoreOrder}/>
-        ) : (
-          <BsFillArrowUpCircleFill className={styles.zscoreOrder} onClick={handleZScoreOrder} />
-        )}
-                </th>
-                {/* <th scope="col">Spread</th> */}
-              </tr>
-            </thead>
-            <tbody style={{ color: "white" }}>{renderTableRows()}</tbody>
-          </table>
+
+  return (
+    <div className={styles.tableContainer}>
+      
+        <div className={styles.table}>
+          <h4 className={styles.title}>Cointegrated Pairs</h4>
+          <div className={styles.dataTable}>
+          {isLoading ? (
+        <RingLoader color="#36d7b7" loading={isLoading} css={spinnerStyle} size={150} />
+      ) : (
+            <table className="table table-dark table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">N°</th>
+                  <th scope="col">Base Market</th>
+                  <th scope="col">Quote Market</th>
+                  <th scope="col">
+                    ZScore{" "}
+                    {order === "asc" ? (
+                      <BsFillArrowDownCircleFill className={styles.zscoreOrder} onClick={handleZScoreOrder} />
+                    ) : (
+                      <BsFillArrowUpCircleFill className={styles.zscoreOrder} onClick={handleZScoreOrder} />
+                    )}
+                  </th>
+                </tr>
+              </thead>
+              <tbody style={{ color: "white" }}>{renderTableRows()}</tbody>
+            </table>)}
+          </div>
         </div>
-      </div>
+      
     </div>
-    // </div>
   );
 };

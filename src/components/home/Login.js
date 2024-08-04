@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { React, useState, useEffect, useCallback } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import styles from "./Login.module.css";
-import "../home/NavMenu.module.css";
+import "./NavMenu.module.css";
 import { NavMenu } from "../home/NavMenu";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +23,10 @@ export const Login = () => {
   const [toastColor, setToastColor] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    console.log('Login component mounted');
+  }, []);
 
   const hideToast = useCallback(() => {
     setShowToast(false);

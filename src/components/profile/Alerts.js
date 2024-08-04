@@ -3,7 +3,6 @@ import "./Profile.module.css";
 import styles from "./Profile.module.css";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-import Toast from "react-bootstrap/Toast";
 import { useSelector} from "react-redux";
 
 export const Alerts = () => {

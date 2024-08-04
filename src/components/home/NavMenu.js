@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { NavLink } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
-import styles from "../home/NavMenu.module.css";
+import styles from "./NavMenu.module.css";
 
 export const NavMenu = () => {
   return (
@@ -17,7 +17,7 @@ export const NavMenu = () => {
           <Nav className={styles.menuContainer}>
                 <NavLink to='/about'>About</NavLink>
                 <NavLink to='/signup'>SignUp</NavLink>
-                <NavLink eventKey={2} to="/login">LogIn</NavLink>
+                <NavLink to="/login">LogIn</NavLink>
 
           </Nav>
         </Navbar.Collapse>

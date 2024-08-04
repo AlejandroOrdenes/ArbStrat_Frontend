@@ -34,6 +34,7 @@
     flex-direction: column;
     width: 100%;
     margin-bottom: 1.5%;
+    
 
 }
 
@@ -48,6 +49,10 @@
 .dataTable {
     max-height: calc(1.5 * 1.75rem * 10);
     overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Establece el alto del contenedor */
 }
 
 h4 {

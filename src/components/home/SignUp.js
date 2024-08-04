@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import styles from "./Login.module.css";
-import "../home/NavMenu.module.css";
+import "./NavMenu.module.css";
 import { NavMenu } from "../home/NavMenu";
 import axios from "axios";
 import Toast from "react-bootstrap/Toast";
@@ -148,7 +148,7 @@ export const SignUp = () => {
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="formBasicUsername">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
@@ -168,7 +168,7 @@ export const SignUp = () => {
                 maxLength={8}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="formBasicPassword2">
               <Form.Label>Repeat Password</Form.Label>
               <Form.Control
                 type="password"
