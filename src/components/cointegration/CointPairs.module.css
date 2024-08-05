@@ -55,6 +55,16 @@
     height: 100%; /* Establece el alto del contenedor */
 }
 
+.dataTableContainer {
+    max-height: calc(1.5 * 1.75rem * 10);
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%; /* Establece el alto del contenedor */
+}
+
 h4 {
     text-align: left;
     padding: 1%;

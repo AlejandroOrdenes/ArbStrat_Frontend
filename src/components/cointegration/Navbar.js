@@ -27,7 +27,7 @@ const Navbar = ({ onLogin, onLogout }) => {
 
   async function fetchCurrentUser() {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/currentUser/", {
+      const response = await axios.get("https://arbstrat.aordenes.com/currentUser/", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -143,7 +143,7 @@ const Navbar = ({ onLogin, onLogout }) => {
         }`}
         onClick={() => handleIconClick("admin")}
       >
-        <a href="http://127.0.0.1:8000/admin/">
+        <a href="https://arbstrat.aordenes.com/admin/">
           <span className={styles.iconContainer}>
             <BsKey
               color={

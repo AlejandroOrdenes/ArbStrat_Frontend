@@ -70,7 +70,7 @@ export const SignUp = () => {
     if (isFormValid) {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/register/",
+          "https://arbstrat.aordenes.com/register/",
           {
             email: email,
             username: username,

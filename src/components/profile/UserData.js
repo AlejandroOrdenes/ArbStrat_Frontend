@@ -39,7 +39,7 @@ export const UserData = () => {
 
   useEffect(() => {
     // Supón que esta URL es donde tu backend expone los datos del usuario
-    fetch("http://localhost:8000/currentUser", {
+    fetch("https://arbstrat.aordenes.com/currentUser", {
       method: "GET",
       headers: {
         // Supón que necesitas enviar un token de autenticación
@@ -51,7 +51,7 @@ export const UserData = () => {
         setName(data.username);
         setEmail(data.email);
         if (data.image_profile !== null) {
-          setImage(`http://localhost:8000${data.image_profile}`);
+          setImage(`https://arbstrat.aordenes.com${data.image_profile}`);
         }
       })
 
@@ -71,7 +71,7 @@ export const UserData = () => {
       formData.append("profile_picture", file);
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/imageUpdate/",
+          "https://arbstrat.aordenes.com/imageUpdate/",
           formData,
           {
             headers: {
@@ -91,7 +91,7 @@ export const UserData = () => {
   const handleDeletePhoto = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/deleteUserImage/",
+        "https://arbstrat.aordenes.com/deleteUserImage/",
         {},
         {
           headers: {
@@ -127,7 +127,7 @@ export const UserData = () => {
     if (isNameChanged) {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/userUpdate/",
+          "https://arbstrat.aordenes.com/userUpdate/",
           {
             username: name,
           },

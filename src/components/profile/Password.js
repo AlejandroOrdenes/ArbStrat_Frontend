@@ -59,7 +59,7 @@ export const Password = () => {
     if (isFormValid) {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/passUpdate/",
+          "https://arbstrat.aordenes.com/passUpdate/",
           {
             currentPassword: currentPassword,
             newPassword: newPassword,

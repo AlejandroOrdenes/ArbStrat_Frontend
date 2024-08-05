@@ -26,7 +26,7 @@ export const ListTrades = ({ onRowClick }) => {
     const handleRowClick = async (pair) => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/cointegratedPair/${pair.idPair}`
+          `https://arbstrat.aordenes.com/cointegratedPair/${pair.idPair}`
         );
   
         onRowClick(response.data[0]);
@@ -62,7 +62,7 @@ export const ListTrades = ({ onRowClick }) => {
 
   useEffect(() => {
     // Supón que esta URL es donde tu backend expone los datos del usuario
-    fetch("http://localhost:8000/currentUser", {
+    fetch("https://arbstrat.aordenes.com/currentUser", {
       method: "GET",
       headers: {
         // Supón que necesitas enviar un token de autenticación
@@ -110,7 +110,7 @@ export const ListTrades = ({ onRowClick }) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/getClosedTrades/", {
+      const response = await axios.get("https://arbstrat.aordenes.com/getClosedTrades/", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -219,7 +219,7 @@ export const ListTrades = ({ onRowClick }) => {
                 {image ? (
                   <img
                     className={styles.profileImage}
-                    src={`http://localhost:8000${image}`}
+                    src={`https://arbstrat.aordenes.com${image}`}
                     alt="Profile"
                   />
                 ) : (

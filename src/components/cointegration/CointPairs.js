@@ -7,6 +7,7 @@ import {
   BsFillArrowDownCircleFill,
   BsFillArrowUpCircleFill
 } from "react-icons/bs";
+
 const KEY_SELECTED_PAIR_ID = "selectedPairID";
 
 export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
@@ -38,8 +39,14 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
   const fetchData = async () => {
     setIsLoading(true); // Inicia la carga
     try {
+      const token = localStorage.getItem('token');
       const response = await axios.get(
-        "http://127.0.0.1:8000/cointegratedPairs/"
+        "https://arbstrat.aordenes.com/cointegratedPairs/", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Asegúrate de usar el prefijo correcto
+          }
+        }
       );
 
       setData(response.data);
@@ -129,7 +136,8 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
           {isLoading ? (
         <RingLoader color="#36d7b7" loading={isLoading} css={spinnerStyle} size={150} />
       ) : (
-            <table className="table table-dark table-striped table-hover">
+            <div className={styles.dataTableContainer}>
+              <table className="table table-dark table-striped table-hover">
               <thead>
                 <tr>
                   <th scope="col">N°</th>
@@ -146,7 +154,8 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
                 </tr>
               </thead>
               <tbody style={{ color: "white" }}>{renderTableRows()}</tbody>
-            </table>)}
+            </table>
+            </div>)}
           </div>
         </div>
       

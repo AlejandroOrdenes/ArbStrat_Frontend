@@ -16,6 +16,7 @@ import {
 import { Line } from "react-chartjs-2";
 import axios from "axios";
 
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -70,11 +71,22 @@ export const CointegrationChart = ({ market1, market2 }) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
+        const token = localStorage.getItem('token');
         const response1 = await axios.get(
-          `http://127.0.0.1:8000/price/${market1.Crypto1_ID}`
+          `https://arbstrat.aordenes.com/price/${market1.Crypto1_ID}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Asegúrate de usar el prefijo correcto
+            }
+          }
         );
         const response2 = await axios.get(
-          `http://127.0.0.1:8000/price/${market1.Crypto2_ID}`
+          `https://arbstrat.aordenes.com/price/${market1.Crypto2_ID}`,  {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Asegúrate de usar el prefijo correcto
+            }
+          }
         );
 
         if (

@@ -12,7 +12,7 @@ export const Alerts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getUserAlerts/", {  
+      .get("https://arbstrat.aordenes.com/getUserAlerts/", {  
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,  
@@ -33,7 +33,7 @@ export const Alerts = () => {
     const isChecked = event.target.checked;
   
     axios
-      .post("http://127.0.0.1:8000/updateEmailAlerts/", { emailAlert: isChecked },  {
+      .post("https://arbstrat.aordenes.com/updateEmailAlerts/", { emailAlert: isChecked },  {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ export const Alerts = () => {
     const isChecked = event.target.checked;
 
     axios
-      .post("http://127.0.0.1:8000/updateDiscordAlerts/", 
+      .post("https://arbstrat.aordenes.com/updateDiscordAlerts/", 
       { 
         discordAlert: isChecked,
 
