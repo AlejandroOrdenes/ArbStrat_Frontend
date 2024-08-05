@@ -11,7 +11,7 @@ export const Verify = (props) => {
     const token = urlParams.get('token');
 
     // Enviar el token al servidor para verificación
-    axios.get(`https://arbstrat.aordenes.com/verify/?token=${token}`)
+    axios.get(`https://arbstrat.aordenes.com/api/verify/?token=${token}`)
       .then(response => {
         // Si la verificación fue exitosa, actualiza el estado
         setVerified(true);

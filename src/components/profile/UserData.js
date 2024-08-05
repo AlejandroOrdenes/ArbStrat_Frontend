@@ -39,7 +39,7 @@ export const UserData = () => {
 
   useEffect(() => {
     // Supón que esta URL es donde tu backend expone los datos del usuario
-    fetch("https://arbstrat.aordenes.com/currentUser", {
+    fetch("https://arbstrat.aordenes.com/api/currentUser", {
       method: "GET",
       headers: {
         // Supón que necesitas enviar un token de autenticación
@@ -51,7 +51,7 @@ export const UserData = () => {
         setName(data.username);
         setEmail(data.email);
         if (data.image_profile !== null) {
-          setImage(`https://arbstrat.aordenes.com${data.image_profile}`);
+          setImage(`https://arbstrat.aordenes.com/api${data.image_profile}`);
         }
       })
 
@@ -71,7 +71,7 @@ export const UserData = () => {
       formData.append("profile_picture", file);
       try {
         const response = await axios.post(
-          "https://arbstrat.aordenes.com/imageUpdate/",
+          "https://arbstrat.aordenes.com/api/imageUpdate/",
           formData,
           {
             headers: {
@@ -91,7 +91,7 @@ export const UserData = () => {
   const handleDeletePhoto = async () => {
     try {
       const response = await axios.post(
-        "https://arbstrat.aordenes.com/deleteUserImage/",
+        "https://arbstrat.aordenes.com/api/deleteUserImage/",
         {},
         {
           headers: {
@@ -127,7 +127,7 @@ export const UserData = () => {
     if (isNameChanged) {
       try {
         const response = await axios.post(
-          "https://arbstrat.aordenes.com/userUpdate/",
+          "https://arbstrat.aordenes.com/api/userUpdate/",
           {
             username: name,
           },

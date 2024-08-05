@@ -59,7 +59,7 @@ export const Password = () => {
     if (isFormValid) {
       try {
         const response = await axios.post(
-          "https://arbstrat.aordenes.com/passUpdate/",
+          "https://arbstrat.aordenes.com/api/passUpdate/",
           {
             currentPassword: currentPassword,
             newPassword: newPassword,

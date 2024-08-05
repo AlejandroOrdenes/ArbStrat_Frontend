@@ -62,7 +62,7 @@ export const ListTrades = ({ onRowClick }) => {
 
   useEffect(() => {
     // Supón que esta URL es donde tu backend expone los datos del usuario
-    fetch("https://arbstrat.aordenes.com/currentUser", {
+    fetch("https://arbstrat.aordenes.com/api/currentUser", {
       method: "GET",
       headers: {
         // Supón que necesitas enviar un token de autenticación

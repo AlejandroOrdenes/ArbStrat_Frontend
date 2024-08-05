@@ -29,7 +29,7 @@ export const login = (email, password) => {
   return async (dispatch) => {
     dispatch(loginRequest());
     try {
-      const response = await axios.post("https://arbstrat.aordenes.com/login/", {
+      const response = await axios.post("https://arbstrat.aordenes.com/api/login/", {
         email,
         password,
       });

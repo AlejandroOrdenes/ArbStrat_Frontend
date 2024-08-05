@@ -73,7 +73,7 @@ export const CointegrationChart = ({ market1, market2 }) => {
       try {
         const token = localStorage.getItem('token');
         const response1 = await axios.get(
-          `https://arbstrat.aordenes.com/price/${market1.Crypto1_ID}`, {
+          `https://arbstrat.aordenes.com/api/price/${market1.Crypto1_ID}`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`, // Asegúrate de usar el prefijo correcto
@@ -81,7 +81,7 @@ export const CointegrationChart = ({ market1, market2 }) => {
           }
         );
         const response2 = await axios.get(
-          `https://arbstrat.aordenes.com/price/${market1.Crypto2_ID}`,  {
+          `https://arbstrat.aordenes.com/api/price/${market1.Crypto2_ID}`,  {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`, // Asegúrate de usar el prefijo correcto

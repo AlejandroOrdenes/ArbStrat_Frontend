@@ -26,7 +26,7 @@ export const ListTrades = ({ onRowClick }) => {
   const handleRowClick = async (pair) => {
     try {
       const response = await axios.get(
-        `https://arbstrat.aordenes.com/cointegratedPair/${pair.idPair}`
+        `https://arbstrat.aordenes.com/api/cointegratedPair/${pair.idPair}`
       );
 
       onRowClick(response.data[0]);
@@ -106,7 +106,7 @@ export const ListTrades = ({ onRowClick }) => {
 
   useEffect(() => {
     // Supón que esta URL es donde tu backend expone los datos del usuario
-    fetch("https://arbstrat.aordenes.com/currentUser", {
+    fetch("https://arbstrat.aordenes.com/api/currentUser", {
       method: "GET",
       headers: {
         // Supón que necesitas enviar un token de autenticación
@@ -154,7 +154,7 @@ export const ListTrades = ({ onRowClick }) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://arbstrat.aordenes.com/getTrades/", {
+      const response = await axios.get("https://arbstrat.aordenes.com/api/getTrades/", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -171,7 +171,7 @@ export const ListTrades = ({ onRowClick }) => {
   const getHistorical = async () => {
     try {
       const response = await axios.get(
-        "https://arbstrat.aordenes.com/getClosedTrades/",
+        "https://arbstrat.aordenes.com/api/getClosedTrades/",
         {
           headers: {
             "Content-Type": "application/json",
@@ -190,7 +190,7 @@ export const ListTrades = ({ onRowClick }) => {
   const getCurrentPrices = async (id) => {
     try {
       const response = await axios.get(
-        "https://arbstrat.aordenes.com/currentPrices/" + id
+        "https://arbstrat.aordenes.com/api/currentPrices/" + id
       );
       setCurrentPrices((prevCurrentPrices) => ({
         ...prevCurrentPrices,
@@ -207,7 +207,7 @@ export const ListTrades = ({ onRowClick }) => {
   const closeTrade = async (tradeData) => {
     try {
       const response = await axios.post(
-        "https://arbstrat.aordenes.com/saveCloseTrade/",
+        "https://arbstrat.aordenes.com/api/saveCloseTrade/",
         {
           coin1: tradeData.coin1,
           amount1: tradeData.amount1,
@@ -230,7 +230,7 @@ export const ListTrades = ({ onRowClick }) => {
       if (response.status === 200) {
         try {
           const response = await axios.post(
-            "https://arbstrat.aordenes.com/closeTrade/",
+            "https://arbstrat.aordenes.com/api/closeTrade/",
             {
               id: tradeData.id,
             },

@@ -41,7 +41,7 @@ export const CointPairs = ({ onRowClick, selectedRow = { id: 22 } }) => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(
-        "https://arbstrat.aordenes.com/cointegratedPairs/", {
+        "https://arbstrat.aordenes.com/api/cointegratedPairs/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`, // Asegúrate de usar el prefijo correcto

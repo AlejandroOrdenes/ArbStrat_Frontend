@@ -55,7 +55,7 @@ export const Recovery = () => {
       try {
         
         const response = await axios.post(
-          "https://arbstrat.aordenes.com/recoveryPassword/",
+          "https://arbstrat.aordenes.com/api/recoveryPassword/",
           {
             email: email,
           },

@@ -102,7 +102,7 @@ export const ModalSimulation = ({ closeModal, showModal, rowData }) => {
     setIsSubmitting(true);
     try {
       const response = await axios.post(
-        "https://arbstrat.aordenes.com/simulateTrades/",
+        "https://arbstrat.aordenes.com/api/simulateTrades/",
         {
           idPair: rowData.id,
           direction: direction,
